@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="sq" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studio Ligjore Gentjana Ndoj</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+            color: #1f2937;
+        }
+        .hero-section {
+            @apply bg-white;
+        }
+        
+        .animated-text-gradient {
+            background: linear-gradient(90deg, purple, #ff69b4,  #0000ff, purple);
+            background-size: 400% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            /* Ndryshimi: Animimi lëviz 400% të gjerësisë për një cikël të pandërprerë */
+            animation: colorShift 40s linear infinite;
+        }
+        
+        @keyframes colorShift {
+            from { background-position: 0% 50%; }
+            to { background-position: 400% 50%; }
+        }
+        
+        /* Klasat e reja për drejtkëndëshin e butonit */
+        .gradient-container {
+            position: relative;
+            padding: 2px; /* Trashësia e kornizës së gradientit */
+            border-radius: 9999px; /* rounded-full */
+            width: fit-content;
+            margin: auto;
+            /* Gradienti i kornizës me animacion lëvizës */
+            background: linear-gradient(to right, #00ffff, #ff00ff, #0000ff, #00ffff);
+            background-size: 300% 100%;
+            /* Ndryshimi: Animimi lëviz 300% të gjerësisë për një cikël të pandërprerë */
+            animation: moveGradient 10s linear infinite;
+        }
+        
+        @keyframes moveGradient {
+            from { background-position: 0% 0%; }
+            to { background-position: 300% 0%; }
+        }
+
+        .gradient-container a {
+            position: relative;
+            z-index: 1;
+            display: inline-block;
+            background-color: #000;
+            color: white;
+            padding: 0.75rem 2.5rem; /* py-3 px-10 */
+            font-weight: 700; /* font-bold */
+            border-radius: 9999px;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .gradient-container:hover a {
+            transform: scale(1.05);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-input {
+            @apply w-full p-3 border border-gray-300 rounded-3xl focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300;
+        }
+        .cta-button-modified {
+            @apply bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-3xl transition-colors duration-300 shadow-lg hover:shadow-xl;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 3;
+        }
+        .fade-in {
+            opacity: 10;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-in.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .animated-blur-bg-blue, .animated-blur-bg-green {
+            position: relative;
+            overflow: hidden;
+            background-color: white;
+        }
+        .animated-blur-bg-blue {
+            @apply p-8 rounded-3xl shadow-lg border-l-4 border-blue-600;
+        }
+        .animated-blur-bg-green {
+            @apply p-8 rounded-3xl shadow-lg border-l-4 border-green-600;
+        }
+        .animated-blur-bg-blue::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 10% 20%, rgba(59, 130, 246, 0.6), transparent 50%),
+                        radial-gradient(circle at 90% 80%, rgba(128, 90, 213, 0.6), transparent 50%);
+            background-size: 200% 200%;
+            animation: moveBlur 20s ease-in-out infinite;
+            filter: blur(50px);
+            opacity: 0.8;
+            z-index: 0;
+        }
+        .animated-blur-bg-green::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 10% 20%, rgba(34, 197, 94, 0.6), transparent 50%),
+                        radial-gradient(circle at 90% 80%, rgba(202, 247, 107, 0.6), transparent 50%);
+            background-size: 200% 200%;
+            animation: moveBlur 20s ease-in-out infinite;
+            filter: blur(50px);
+            opacity: 0.8;
+            z-index: 0;
+        }
+        @keyframes moveBlur {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+        .animated-service-bg {
+            position: relative;
+            overflow: hidden;
+            background-color: white;
+            @apply p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105;
+        }
+        .animated-service-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 70%, rgba(135, 190, 250, 0.7), transparent 50%),
+                        radial-gradient(circle at 80% 30%, rgba(180, 150, 250, 0.7), transparent 50%);
+            background-size: 200% 200%;
+            animation: moveServiceBlur 24s ease-in-out infinite;
+            filter: blur(40px);
+            opacity: 0.8;
+            z-index: 0;
+        }
+        @keyframes moveServiceBlur {
+            0% { background-position: 0% 100%; }
+            50% { background-position: 100% 0%; }
+            100% { background-position: 0% 100%; }
+        }
+
+        /* Klasat e reja për dëshmitë me animacion */
+        .testimonial-card-animated {
+            position: relative;
+            overflow: hidden;
+            background-color: white; /* Ngjyra bazë e sfondit */
+            @apply p-8 rounded-3xl shadow-lg hover:shadow-xl transition-shadow duration-300;
+        }
+        .testimonial-card-animated > * {
+            position: relative;
+            z-index: 1; /* Sigurojmë që përmbajtja të jetë sipër animacionit */
+        }
+        .testimonial-card-animated::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: 200% 200%;
+            animation: moveBlur 20s ease-in-out infinite;
+            filter: blur(50px);
+            opacity: 0.8;
+            z-index: 0;
+        }
+        
+        .testimonial-card-animated.card-1::before {
+            /* Ngjyra blu-vjollcë */
+            background: radial-gradient(circle at 10% 20%, rgba(59, 130, 246, 0.6), transparent 50%),
+                        radial-gradient(circle at 90% 80%, rgba(128, 90, 213, 0.6), transparent 50%),
+                        radial-gradient(circle at 50% 50%, rgba(199, 210, 254, 0.6), transparent 50%);
+        }
+        .testimonial-card-animated.card-2::before {
+            /* Ngjyra roze-portokalli */
+            background: radial-gradient(circle at 10% 20%, rgba(236, 72, 153, 0.6), transparent 50%),
+                        radial-gradient(circle at 90% 80%, rgba(249, 115, 22, 0.6), transparent 50%),
+                        radial-gradient(circle at 50% 50%, rgba(253, 224, 71, 0.6), transparent 50%);
+        }
+        .testimonial-card-animated.card-3::before {
+            /* Ngjyra e qetë vjollcë-blu */
+            background: radial-gradient(circle at 10% 20%, rgba(165, 180, 252, 0.6), transparent 50%),
+                        radial-gradient(circle at 90% 80%, rgba(139, 92, 246, 0.6), transparent 50%),
+                        radial-gradient(circle at 50% 50%, rgba(224, 231, 255, 0.6), transparent 50%);
+        }
+        
+        .animated-blur-bg-blue > *, .animated-blur-bg-green > *, .animated-service-bg > * {
+            position: relative;
+            z-index: 1;
+        }
+        .about-text-container {
+            font-family: 'Playfair Display', serif;
+        }
+        .about-text-container p {
+            font-family: 'Inter', sans-serif;
+        }
+        .about-heading {
+            font-family: 'Playfair Display', serif;
+            @apply font-bold text-gray-900;
+        }
+        .rounded-3xl {
+            border-radius: 1.5rem;
+        }
+        
+        /* Ndryshimi: Funksionalitet i shfaqjes/fshirjes së shërbimeve me JavaScript */
+        .service-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out;
+        }
+
+        /* New scrolling news bar */
+        .news-ticker-container {
+            background-color: #1f2937; /* Dark background */
+            color: #ffffff;
+            height: 2.5rem; /* Make the line a bit thinner */
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        
+        .news-ticker-content {
+            display: inline-block;
+            white-space: nowrap;
+            /* Ndryshimi: Animimi tani përdor transformin për një cikël të pafund */
+            animation: ticker-scroll 20s linear infinite; /* Kohëzgjatja u shkurtua për të hequr vonesën */
+        }
+        
+        .news-ticker-content span {
+            padding: 0 4rem; /* Increased padding */
+            font-size: 1rem; /* Slightly smaller font */
+            font-weight: 400; /* Thinner font weight */
+            font-family: 'Playfair Display', serif; /* Modern font */
+        }
+
+        @keyframes ticker-scroll {
+            from {
+                transform: translateX(0%);
+            }
+            to {
+                /* Vlerat e animacionit u ndryshuan për t'u përshtatur me përmbajtjen e dyfishuar */
+                transform: translateX(-100%);
+            }
+        }
+
+        /* Klasa e re për tekstin që do të ndryshojë me scroll */
+        .nav-text {
+            transition: opacity 0.5s ease-in-out, filter 0.5s ease-in-out;
+        }
+
+        /* Stilet e reja për fundfaqen */
+        .footer-social-icons a {
+            transition: transform 0.3s ease-in-out;
+        }
+        .footer-social-icons a:hover {
+            transform: translateY(-5px) scale(1.1);
+        }
+        
+        /* Stilet për tekstin e zhvilluesit */
+        .developer-info {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+            opacity: 0;
+        }
+        .developer-info.show {
+            max-height: 200px; /* Një vlerë e mjaftueshme për të shfaqur përmbajtjen */
+            opacity: 1;
+        }
+
+    </style>
+</head>
+<body class="bg-slate-100 text-gray-800">
+
+    <nav class="bg-white p-2 sticky top-0 z-50 shadow-md">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold rounded-3xl px-3 py-1 text-gray-900 nav-text" id="brand-text">STUDIO LIGJORE G.N</a>
+            <div class="md:hidden">
+                <button id="menu-btn" class="text-gray-900 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+            <div id="nav-links" class="hidden md:flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0 md:space-x-6 text-sm md:text-base font-medium">
+                <a href="#about" class="block py-2 px-3 hover:bg-slate-200 rounded-3xl transition-colors duration-300 nav-text">Rreth nesh</a>
+                <a href="#services" class="block py-2 px-3 hover:bg-slate-200 rounded-3xl transition-colors duration-300 nav-text">Shërbimet</a>
+                <a href="#testimonials" class="block py-2 px-3 hover:bg-slate-200 rounded-3xl transition-colors duration-300 nav-text">Dëshmi</a>
+                <a href="#contact" class="block py-2 px-3 hover:bg-slate-200 rounded-3xl transition-colors duration-300 nav-text">Kontakti</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- New scrolling news bar -->
+    <div class="news-ticker-container">
+        <div class="news-ticker-content">
+            <!-- Përmbajtja e dyfishuar për animacion pa ndërprerje -->
+            <span>• 11 vite eksperiencë •</span>
+            <span>• 96% e gjyqeve të fituara •</span>
+            <span>• Partneritet & Besim •</span>
+            <span>• 11 vite eksperiencë •</span>
+            <span>• 96% e gjyqeve të fituara •</span>
+            <span>• Partneritet & Besim •</span>
+            <span>• 11 vite eksperiencë •</span>
+            <span>• 96% e gjyqeve të fituara •</span>
+            <span>• Partneritet & Besim •</span>
+            <span>• 11 vite eksperiencë •</span>
+            <span>• 96% e gjyqeve të fituara •</span>
+            <span>• Partneritet & Besim •</span>
+        </div>
+    </div>
+    
+    <header class="relative text-gray-800 flex items-center justify-center text-left hero-section py-16 md:py-24">
+        <div class="hero-content max-w-4xl mx-4 md:mx-0 p-6 rounded-3xl">
+            <h1 class="text-3xl md:text-5xl font-extrabold mb-3 leading-tight animated-text-gradient">Studio Ligjore Gentjana Ndoj</h1>
+            <p class="text-sm md:text-base mb-6 font-light max-w-2xl text-gray-800">
+                Ekspertë në mbrojtjen e të drejtave tuaja. Ne ofrojmë konsulencë dhe përfaqësim ligjor të personalizuar, duke kombinuar eksperiencën me inovacionin për të siguruar suksesin tuaj.
+            </p>
+            <div class="gradient-container">
+                <a href="#contact">Bëni një konsultë</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+
+        <section id="about" class="my-8 fade-in">
+            <h2 class="text-3xl md:text-4xl font-bold text-center about-heading mb-8">Rreth Nesh</h2>
+            <div class="grid md:grid-cols-2 gap-8 items-center bg-white p-8 rounded-3xl shadow-xl transition-all duration-300 hover:shadow-2xl">
+                <div class="order-2 md:order-1 about-text-container">
+                    <p class="text-lg text-gray-700 mb-4 leading-relaxed font-light">
+                        Në një botë ligjore plot sfida, ne jemi partneri juaj i sigurt. Tek *Studio Ligjore Gentjana Ndoja*, ne nuk jemi thjesht avokatë. Jemi artizanët e drejtësisë, të dedikuar për të mbrojtur çdo të drejtë tuajën. Me përvojë të thellë dhe një pasion të pashuar për të vërtetën, ne jemi aleatët tuaj më të fortë në çdo hap të rrugëtimit ligjor.
+                    </p>
+                    <p class="text-lg text-gray-700 mb-4 leading-relaxed font-light">
+                        Përvoja jonë kombinon diturinë ligjore klasike me një qasje të freskët dhe inovative. Ne ndërtojmë ura, jo mure, duke e bërë procesin ligjor të kuptueshëm dhe të arritshëm. Qëllimi ynë nuk është thjesht fitorja, por ofrimi i qetësisë mendore dhe sigurisë që çdo çështje do të trajtohet me përkushtimin maksimal.
+                    </p>
+                    <p class="text-lg text-gray-700 leading-relaxed font-light">
+                        Sfidat tuaja ligjore janë historia jonë. Me një fokus të palëkundur te detajet dhe një strategji të përshtatur posaçërisht për ju, ne jemi gati të luftojmë për atë që ju takon.
+                    </p>
+                </div>
+                <div class="order-1 md:order-2 flex justify-center items-center">
+                    <img src="https://placehold.co/500x500/cbd5e1/264653?text=Foto" alt="Një avokat profesionist" class="rounded-3xl shadow-xl w-64 h-64 md:w-80 md:h-80 object-cover">
+                </div>
+            </div>
+        </section>
+
+        <section class="my-8 text-center fade-in">
+            <div class="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+                <div class="animated-blur-bg-blue rounded-3xl">
+                    <h3 id="won-cases" class="text-5xl md:text-6xl font-extrabold text-blue-600 mb-2">44</h3>
+                    <p class="text-xl md:text-2xl font-semibold text-gray-700">RASTE ME SUKSES</p>
+                </div>
+                <div class="animated-blur-bg-green rounded-3xl">
+                    <h3 id="years-of-experience" class="text-5xl md:text-6xl font-extrabold text-green-600 mb-2">11+</h3>
+                    <p class="text-xl md:text-2xl font-semibold text-gray-700">VITE PËRVOJË</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="my-8 fade-in">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-8">Fushat e Praktikës Sonë</h2>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <div class="animated-service-bg rounded-3xl">
+                    <div class="flex justify-between items-center cursor-pointer" onclick="toggleDetails(this)">
+                        <h3 class="text-2xl font-semibold text-blue-600">Çështjet Civile</h3>
+                        <span class="text-3xl text-blue-600 transition-transform duration-300 transform" data-arrow>↓</span>
+                    </div>
+                    <div class="mt-4 service-content">
+                        <p class="text-gray-600">
+                           Ne ofrojmë zgjidhje ligjore për mosmarrëveshje civile, duke përfshirë çështjet që lidhen me borxhet, dëmet, dhe interpretimin e kontratave.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="animated-service-bg rounded-3xl">
+                    <div class="flex justify-between items-center cursor-pointer" onclick="toggleDetails(this)">
+                        <h3 class="text-2xl font-semibold text-blue-600">Çështjet Familjare</h3>
+                        <span class="text-3xl text-blue-600 transition-transform duration-300 transform" data-arrow>↓</span>
+                    </div>
+                    <div class="mt-4 service-content">
+                        <p class="text-gray-600">
+                           Studioja jonë ofron asistencë të plotë në çështjet e ndërlikuara familjare, duke përfshirë procedurat e divorcit dhe kujdestarisë së fëmijëve.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="animated-service-bg rounded-3xl">
+                    <div class="flex justify-between items-center cursor-pointer" onclick="toggleDetails(this)">
+                        <h3 class="text-2xl font-semibold text-blue-600">Çështjet Administrative</h3>
+                        <span class="text-3xl text-blue-600 transition-transform duration-300 transform" data-arrow>↓</span>
+                    </div>
+                    <div class="mt-4 service-content">
+                        <p class="text-gray-600">
+                           Përfaqësim ligjor profesional në çështjet administrative, duke garantuar mbrojtjen e të drejtave tuaja në raportet me institucionet shtetërore.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="animated-service-bg rounded-3xl">
+                    <div class="flex justify-between items-center cursor-pointer" onclick="toggleDetails(this)">
+                        <h3 class="text-2xl font-semibold mb-4 text-blue-600">Veprat Penale</h3>
+                        <span class="text-3xl text-blue-600 transition-transform duration-300 transform" data-arrow>↓</span>
+                    </div>
+                    <div class="mt-4 service-content">
+                        <p class="text-gray-600">
+                           Ne ofrojmë zgjidhje ligjore për mosmarrëveshje civile, duke përfshirë çështjet që lidhen me borxhet, dëmet, dhe interpretimin e kontratave.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="animated-service-bg rounded-3xl">
+                    <div class="flex justify-between items-center cursor-pointer" onclick="toggleDetails(this)">
+                        <h3 class="text-2xl font-semibold text-blue-600">Çështjet Familjare</h3>
+                        <span class="text-3xl text-blue-600 transition-transform duration-300 transform" data-arrow>↓</span>
+                    </div>
+                    <div class="mt-4 service-content">
+                        <p class="text-gray-600">
+                           Studioja jonë ofron asistencë të plotë në çështjet e ndërlikuara familjare, duke përfshirë procedurat e divorcit dhe kujdestarisë së fëmijëve.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="animated-service-bg rounded-3xl">
+                    <div class="flex justify-between items-center cursor-pointer" onclick="toggleDetails(this)">
+                        <h3 class="text-2xl font-semibold text-blue-600">Çështjet Administrative</h3>
+                        <span class="text-3xl text-blue-600 transition-transform duration-300 transform" data-arrow>↓</span>
+                    </div>
+                    <div class="mt-4 service-content">
+                        <p class="text-gray-600">
+                           Përfaqësim ligjor profesional në çështjet administrative, duke garantuar mbrojtjen e të drejtave tuaja në raportet me institucionet shtetërore.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="animated-service-bg rounded-3xl">
+                    <div class="flex justify-between items-center cursor-pointer" onclick="toggleDetails(this)">
+                        <h3 class="text-2xl font-semibold mb-4 text-blue-600">Veprat Penale</h3>
+                        <span class="text-3xl text-blue-600 transition-transform duration-300 transform" data-arrow>↓</span>
+                    </div>
+                    <div class="mt-4 service-content">
+                        <p class="text-gray-600">
+                            Mbrojtje kundër akuzave për vepra penale të ndryshme, si vjedhja, mashtrimi, ose dëmtimi i pronës.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="animated-service-bg rounded-3xl">
+                    <div class="flex justify-between items-center cursor-pointer" onclick="toggleDetails(this)">
+                        <h3 class="text-2xl font-semibold mb-4 text-blue-600">Konsulencë në Prokurime Publike</h3>
+                        <span class="text-3xl text-blue-600 transition-transform duration-300 transform" data-arrow>↓</span>
+                    </div>
+                    <div class="mt-4 service-content">
+                        <p class="text-gray-600">
+                           Këshillim dhe asistencë ligjore e specializuar për procedurat e prokurimeve publike, duke siguruar pajtueshmëri me ligjin dhe rezultate të favorshme.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="animated-service-bg rounded-3xl">
+                    <div class="flex justify-between items-center cursor-pointer" onclick="toggleDetails(this)">
+                        <h3 class="text-2xl font-semibold mb-4 text-blue-600">E Drejta e Punës</h3>
+                        <span class="text-3xl text-blue-600 transition-transform duration-300 transform" data-arrow>↓</span>
+                    </div>
+                    <div class="mt-4 service-content">
+                        <p class="text-gray-600">
+                           Këshilla ligjore për marrëdhëniet e punës, kontratat, shkarkimet, dhe zgjidhjen e konflikteve në vendin e punës.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seksioni i ri: Dëshmi Klientësh -->
+        <section id="testimonials" class="my-8 fade-in">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-8">Dëshmi nga Klientët</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <div class="testimonial-card-animated card-1">
+                    <p class="text-xl italic text-gray-700 mb-4 leading-relaxed">
+                        "Studio Ligjore Gentjana Ndoj më ndihmoi të zgjidhja një çështje të vështirë pronësore. Profesionalizmi dhe përkushtimi i tyre ishte i jashtëzakonshëm. Këshillat e tyre ishin thelbësore për fitoren time."
+                    </p>
+                    <div class="border-t border-gray-200 pt-4 mt-4">
+                        <p class="font-bold text-gray-900">Fatmir H.</p>
+                        <p class="text-gray-500 text-sm">Biznesmen, Tiranë</p>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card-animated card-2">
+                    <p class="text-xl italic text-gray-700 mb-4 leading-relaxed">
+                        "E drejta e Punës mund të jetë e ndërlikuar, por ekipi i Gentjanës e bëri procesin shumë të qartë dhe të lehtë. Ata më përfaqësuan me sukses dhe mora atë që më takonte. Faleminderit!"
+                    </p>
+                    <div class="border-t border-gray-200 pt-4 mt-4">
+                        <p class="font-bold text-gray-900">Anila M.</p>
+                        <p class="text-gray-500 text-sm">Menaxhere, Shkodër</p>
+                    </div>
+                </div>
+
+                <div class="testimonial-card-animated card-3">
+                    <p class="text-xl italic text-gray-700 mb-4 leading-relaxed">
+                        "E drejta familjare është shumë delikate. Kam pasur nevojë për një avokat që jo vetëm kupton ligjin, por edhe ndjenjat. Gentjana dhe ekipi i saj ishin të shkëlqyer, duke ofruar mbështetje dhe profesionalizëm gjatë gjithë kohës."
+                    </p>
+                    <div class="border-t border-gray-200 pt-4 mt-4">
+                        <p class="font-bold text-gray-900">Genti P.</p>
+                        <p class="text-gray-500 text-sm">Arkitekt, Durrës</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="my-8 bg-white p-8 md:p-12 rounded-3xl shadow-lg fade-in">
+            <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-6">Na Kontaktoni</h2>
+            <p class="text-center text-gray-600 mb-8 max-w-xl mx-auto">
+                Plotësoni formularin ose na kontaktoni direkt për të kërkuar një konsultë.
+            </p>
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <form id="contact-form" class="space-y-4">
+                    <div>
+                        <input type="text" id="name" placeholder="Emri i plotë" required class="form-input">
+                    </div>
+                    <div>
+                        <input type="email" id="email" placeholder="Email" required class="form-input">
+                    </div>
+                    <div>
+                        <input type="tel" id="phone" placeholder="Numri i telefonit" class="form-input">
+                    </div>
+                    <div>
+                        <textarea id="message" rows="5" placeholder="Mesazhi juaj..." required class="form-input"></textarea>
+                    </div>
+                    <button type="submit" class="w-full cta-button-modified">Dërgo Mesazhin</button>
+                    <div id="status-message" class="mt-4 text-center hidden"></div>
+                </form>
+
+                <!-- Ndryshimi: Përdorim një dizajn estetik për informacionin e kontaktit -->
+                <div class="flex flex-col space-y-4 justify-center">
+                    <h3 class="text-lg font-semibold text-gray-900 text-center md:text-left">Informacione Kontakti</h3>
+                    
+                    <!-- Adresa -->
+                    <div class="flex items-start bg-slate-50 p-6 rounded-3xl shadow-sm">
+                        <div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 text-blue-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                            </svg>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-gray-900 font-bold">Adresa</p>
+                            <p class="text-gray-600 text-sm">Zyre Kati I, Rr. "Don Bosko" , Perball ish-gjykates shkoder, Nr. Pas 4/544, ZK 8594</p>
+                        </div>
+                    </div>
+
+                    <!-- Email -->
+                    <a href="mailto:gentjanandoja@gmail.com" class="flex items-center bg-slate-50 p-6 rounded-3xl shadow-sm hover:shadow-md transition-shadow">
+                        <div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-100 text-green-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M22 6c0-1.103-.897-2-2-2H4c-1.103 0-2 .897-2 2v12c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2V6zm-2 0l-8 5.333L4 6h16zM4 18V8.667l8 5.333 8-5.333V18H4z"/>
+                            </svg>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-gray-900 font-bold">Email</p>
+                            <p class="text-gray-600 text-sm">gentjanandoja@gmail.com</p>
+                        </div>
+                    </a>
+
+                    <!-- Telefoni - Rregulluar -->
+                    <a href="tel:+355672562975" class="flex items-center bg-slate-50 p-6 rounded-3xl shadow-sm hover:shadow-md transition-shadow">
+                        <div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-purple-100 text-purple-600">
+                            <!-- SVG i ri, ikonë e telefonit -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M6.62 10.79a15.448 15.448 0 006.51 6.51l2.36-2.36a1 1 0 011.1-.21c.91.48 2.37.96 4.14 1.05a1 1 0 011 .99v4.2c0 .55-.45 1-1 1A18.99 18.99 0 013 5.48c0-.55.45-1 1-1h4.2a1 1 0 01.99 1c.09 1.77.57 3.23 1.05 4.14a1 1 0 01-.21 1.1l-2.36 2.36z"/>
+                            </svg>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-gray-900 font-bold">Telefoni</p>
+                            <p class="text-gray-600 text-sm">+355 67 25 62 975</p>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Fundfaqja (Footer) e re, rregulluar që të mbulojë të gjithë gjerësinë -->
+        <footer class="text-center text-gray-400 text-sm py-8 bg-gray-800 w-full">
+            <div class="container mx-auto px-4">
+                <div class="flex justify-center space-x-6 mb-4 footer-social-icons">
+                    <!-- Facebook Icon (SVG) -->
+                    <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:text-blue-600">
+                        <svg class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33V22C17.343 21.128 22 16.991 22 12z" clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                    <!-- Instagram Icon (SVG) - Rregulluar -->
+                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="text-pink-500 hover:text-pink-600">
+                        <svg class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.851.071 1.171.056 1.83.249 2.414.481.58.232 1.057.556 1.52.981.463.425.787.903 1.02 1.482.231.583.424 1.242.481 2.414.06 1.267.072 1.647.072 4.851s-.012 3.584-.072 4.851c-.057 1.171-.25 1.83-.481 2.414-.232.58-.556 1.057-.981 1.52-.425.463-.903.787-1.482 1.02-.583.231-1.242.424-2.414.481-1.267.06-1.647.072-4.851.072s-3.584-.012-4.851-.072c-1.171-.057-1.83-.25-2.414-.481-.58-.232-1.057-.556-1.52-.981-.463-.425-.787-.903-1.482-1.02-.583-.231-1.242-.424-.481-2.414-.06-1.267-.072-1.647-.072-4.851s.012-3.584.072-4.851c.057-1.171.25-1.83.481-2.414.232-.58.556-1.057.981-1.52.425-.463.903-.787 1.482-1.02.583-.231 1.242-.424 2.414-.481C8.416 2.175 8.796 2.163 12 2.163zm0 1.837c-3.132 0-3.535.011-4.721.069-.994.047-1.472.222-1.808.356-.34.135-.61.306-.889.584-.279.278-.449.549-.584.889-.134.336-.309.814-.356 1.808-.058 1.186-.069 1.589-.069 4.721s.011 3.535.069 4.721c.047.994.222 1.472.356 1.808.135.34.306.61.584.889.278.279.549.449.889.584.134.336.309.814.356 1.808.058 1.186.069 1.589.069 4.721s-.011 3.535-.069 4.721c-.047-.994-.222-1.472-.356-1.808-.135-.34-.306-.61-.584-.889-.278-.279-.549-.449-.889-.584-.336-.134-.814-.309-1.808-.356C15.535 3.999 15.132 3.988 12 3.988zM12 6.5c-3.033 0-5.5 2.467-5.5 5.5s2.467 5.5 5.5 5.5 5.5-2.467 5.5-5.5-2.467-5.5-5.5-5.5zm0 9c-1.933 0-3.5-1.567-3.5-3.5s1.567-3.5 3.5-3.5 3.5 1.567 3.5 3.5-1.567 3.5-3.5 3.5zm5.5-10.5a1.25 1.25 0 110-2.5 1.25 1.25 0 010 2.5z"/>
+                        </svg>
+                    </a>
+                </div>
+                <p>&copy; 2025 Studio Ligjore Gentjana Ndoj.</p>
+                <button id="dev-toggle" class="mt-4 text-xs font-semibold text-gray-500 hover:text-gray-300 transition-colors duration-300 focus:outline-none">
+                    About the Developer
+                </button>
+                <div id="developer-info-content" class="developer-info text-center text-xs mt-2 text-gray-400">
+                    <p>Contact the developer via:</p>
+                    <p class="mt-1">Email: <a href="mailto:ndrekaendi@gmail.com" class="text-blue-400 hover:underline">ndrekaendi@gmail.com</a></p>
+                    <p>Phone number: <a href="tel:+355693301930" class="text-blue-400 hover:underline">+355 69 330 1930</a></p>
+                </div>
+            </div>
+        </footer>
+    </main>
+    
+    <script>
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        document.querySelectorAll('.fade-in').forEach(section => {
+            observer.observe(section);
+        });
+
+        document.getElementById('contact-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const statusMessage = document.getElementById('status-message');
+            statusMessage.classList.remove('hidden', 'text-red-500', 'text-green-500');
+            statusMessage.textContent = 'Duke dërguar mesazhin...';
+            statusMessage.classList.add('text-gray-500', 'block');
+            setTimeout(() => {
+                statusMessage.textContent = 'Mesazhi u dërgua me sukses!';
+                statusMessage.classList.remove('text-gray-500');
+                statusMessage.classList.add('text-green-500');
+                document.getElementById('contact-form').reset();
+            }, 2000);
+        });
+
+        // Funksioni i përditësuar për hapje/mbyllje më të besueshme
+        function toggleDetails(element) {
+            const content = element.nextElementSibling;
+            const arrow = element.querySelector('[data-arrow]');
+            
+            // Kontrollojmë nëse përmbajtja është e hapur apo e mbyllur
+            if (content.style.maxHeight && content.style.maxHeight !== "0px") {
+                // Mbyll
+                content.style.maxHeight = '0px';
+                arrow.style.transform = 'rotate(0deg)';
+            } else {
+                // Hape
+                content.style.maxHeight = content.scrollHeight + 'px';
+                arrow.style.transform = 'rotate(180deg)';
+            }
+        }
+        
+        document.getElementById('menu-btn').addEventListener('click', () => {
+            const navLinks = document.getElementById('nav-links');
+            navLinks.classList.toggle('hidden');
+            navLinks.classList.toggle('flex');
+            navLinks.classList.toggle('space-y-2');
+        });
+        
+        document.querySelectorAll('#nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                const navLinks = document.getElementById('nav-links');
+                if (window.innerWidth < 768) {
+                    navLinks.classList.add('hidden');
+                    navLinks.classList.remove('flex');
+                }
+            });
+        });
+
+        // Funksioni për efektin e turbullimit me scroll
+        window.addEventListener('scroll', () => {
+            const navTextElements = document.querySelectorAll('.nav-text');
+            const scrollY = window.scrollY;
+            
+            // Llogarit lartësinë totale të faqes që mund të shikohet
+            const totalScrollHeight = document.body.scrollHeight - window.innerHeight;
+            
+            // Mbrojtje nga ndarja me zero
+            if (totalScrollHeight <= 0) {
+                navTextElements.forEach(element => {
+                    element.style.opacity = 1;
+                    element.style.filter = 'blur(0px)';
+                });
+                return;
+            }
+
+            // Llogarit progresin e scrollit nga 0 (lart) në 1 (fund)
+            const scrollProgress = Math.min(scrollY / totalScrollHeight, 1);
+            
+            // Përcakton vlerat maksimale të turbullimit
+            const maxBlur = 10; 
+            const maxOpacity = 1; 
+
+            // Llogarit vlerat e reja bazuar në progresin
+            const blurValue = scrollProgress * maxBlur;
+            const opacityValue = maxOpacity - scrollProgress;
+
+            navTextElements.forEach(element => {
+                element.style.opacity = opacityValue;
+                element.style.filter = blur(${blurValue}px);
+            });
+        });
+
+        // Funksioni për të shfaqur/fshehur informacionin e zhvilluesit
+        document.getElementById('dev-toggle').addEventListener('click', () => {
+            const devInfo = document.getElementById('developer-info-content');
+            devInfo.classList.toggle('show');
+        });
+    </script>
+</body>
+</html>
